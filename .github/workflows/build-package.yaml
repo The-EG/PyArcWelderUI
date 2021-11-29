@@ -1,0 +1,61 @@
+# This file is part of PyArcWelderUI.
+#
+# PyArcWelderUI is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# PyArcWelderUI is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with PyArcWelderUI.  If not, see <https://www.gnu.org/licenses/>.
+
+# Package up PyArcWelderUI in tidy zip and txz files for easy distribution
+
+name: Package PyArcWelderUI
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types: [published]
+
+jobs:
+  build-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git repo
+        uses: actions/checkout@v2
+
+      - name: Create Python package zip
+        shell: bash
+        run: python3 scripts/create_archive.py
+
+      - name: Create zip package
+        shell: bash
+        run: zip PyArcWelderUI.zip pyawui.zip pyawui.ini README.md LICENSE
+
+      - name: Create txz package
+        shell: bash
+        run: tar clvf PyArcWelderUI.txz pyawui.zip pyawui.ini README.md LICENSE
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: PyArcWelderUI-Artifacts
+          path: |
+            PyArcWelderUI.zip
+            PyArcWelderUI.txz
+
+      - name: Upload release files
+        uses: softprops/action-gh-release@v1
+        if: ${{ github.event_name == 'release' }}
+        with:
+          files: |
+            PyArcWelderUI.zip
+            PyArcWelderUI.txz
+    
