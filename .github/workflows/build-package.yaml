@@ -31,17 +31,13 @@ jobs:
       - name: Checkout git repo
         uses: actions/checkout@v2
 
-      - name: Create Python package zip
-        shell: bash
-        run: python3 scripts/create_archive.py
-
       - name: Create zip package
         shell: bash
-        run: zip PyArcWelderUI.zip pyawui.zip pyawui.ini README.md LICENSE
+        run: zip PyArcWelderUI.zip pyawui.ini README.md LICENSE pyawui/*.py
 
       - name: Create txz package
         shell: bash
-        run: tar clvf PyArcWelderUI.txz pyawui.zip pyawui.ini README.md LICENSE
+        run: tar clvf PyArcWelderUI.txz pyawui.ini README.md LICENSE pyawui/*.py
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2

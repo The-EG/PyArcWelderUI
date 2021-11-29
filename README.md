@@ -21,5 +21,5 @@ A GUI for [ArcWelder](https://github.com/FormerLurker/ArcWelderLib) Console. Thi
     - Enable and specify any ArcWelder options as appropriate
  5. Configure your slicer:
     - Slic3r/PrusaSlicer/SuperSlicer:  
-      Specify the path to python3 and the pyawui.zip files in the `Post-Processing scripts` option in the Output Options in your Print Settings profile. *Note: you  will need to enable 'Expert' settings to see this option and you will need to do this for each Print Settings profile you want to use*. For example:  
-      `python3 ~/programs/PyArcWelderUI/pyawui.zip` or `C:\Python39\python3.exe c:\Programs\PyArcWelderUI\pyawui.zip`
+      Specify the path to python3 and the pyawui folder in the `Post-Processing scripts` option in the Output Options in your Print Settings profile. *Note: you  will need to enable 'Expert' settings to see this option and you will need to do this for each Print Settings profile you want to use*. For example:  
+      `python3 ~/programs/PyArcWelderUI/pyawui` or `C:\Python39\python3.exe c:\Programs\PyArcWelderUI\pyawui`
