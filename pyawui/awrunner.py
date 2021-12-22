@@ -1,3 +1,5 @@
+# Copyright 2021 Taylor Talkington
+# 
 # This file is part of PyArcWelderUI.
 #
 # PyArcWelderUI is free software: you can redistribute it and/or modify
@@ -35,6 +37,15 @@ _TTL_CNT_TGT = re.compile(r'^\| +Total count target:\.+(?P<value>-?\d+)\|$')
 _TTL_PERC_CHNG = re.compile(r'^\| Total percent change:\.+(?P<value>-?\d+\.\d+)%\|$')
 
 class ArcWelderRunner:
+    """
+    A class that runs ArcWelder console, optionally providing progress and completion info.
+    
+    If set, progress_cb and finished_cb will be called with a single argument containing a
+    dict of appropriate info.
+
+    aw_flags and aw_options can be used to pass flags and options to ArcWelder, respectively.
+    These flags must be in long form, ie. '--flag-name,' without the leading '--' ('flag-name').
+    """
     def __init__(self, arc_welder_path="ArcWelder"):
         self._awpath = arc_welder_path
 
@@ -56,6 +67,7 @@ class ArcWelderRunner:
         self._welding_stats = {}
 
     def verify_version(self):
+        """Verify the version of ArcWelder. Currently only 1.2 or greater is supported. Not used."""
         out = subprocess.check_output([self._awpath, '--version']).decode('utf8').splitlines()
         for line in out:
             m = _VERSION_PAT.match(line)

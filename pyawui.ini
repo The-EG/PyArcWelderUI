@@ -1,3 +1,5 @@
+# Copyright 2021 Taylor Talkington
+# 
 # This file is part of PyArcWelderUI.
 #
 # PyArcWelderUI is free software: you can redistribute it and/or modify
